@@ -137,23 +137,17 @@
                 <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
     <div class="card">
     
-    <div class="card-image">
-        <a href="/2019/12/09/VUE知识梳理/" class="image is-7by1">
-            <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
-        </a>
-    </div>
-    
     <div class="card-content article ">
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time>
+                <time class="level-item has-text-grey" datetime="2020-01-09T16:18:40.000Z">2020-01-10</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2187 个字)
+                    3 分钟 读完 (大约 478 个字)
                 </span>
                 
                 
@@ -162,93 +156,31 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/12/09/VUE知识梳理/">VUE知识点梳理</a>
+                <a class="has-link-black-ter" href="/2020/01/10/VUE开发中遇到的问题/">VUE开发中遇到的问题</a>
             
         </h1>
         <div class="content">
-            <h2 id="1-对于MVVM的理解"><a href="#1-对于MVVM的理解" class="headerlink" title="1.对于MVVM的理解"></a>1.对于MVVM的理解</h2><hr>
-<p><strong>MVVM</strong> 是 <strong>Model-View-ViewModel</strong> 的缩写</p>
-<p><strong>Model</strong>: 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为</p>
-<p><strong>View</strong>: 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View</p>
-<p><strong>ViewModel</strong>： 业务逻辑层，View需要什么数据，ViewModel要提供这个数据；View有某些操作，ViewModel就要响应这些操作，所以可以说它是Model for View.<br>总结： MVVM模式简化了界面与业务的依赖，解决了数据频繁更新</p>
-<p>MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</p>
-<blockquote>
-<p>MVVM的缺点<br>1.Bug很难被调试: 因为使用双向绑定的模式，当你看到界面异常了，有可能是你View的代码有Bug，也可能是Model的代码有问题。<br>2.一个大的模块中model也会很大，虽然使用方便了也很容易保证了数据的一致性，当时长期持有，不释放内存就造成了花费更多的内存<br>3.对于大型的图形应用程序，视图状态较多，ViewModel的构建和维护的成本都会比较高</p>
+            <h1 id="对象数组深度监听"><a href="#对象数组深度监听" class="headerlink" title="对象数组深度监听"></a>对象数组深度监听</h1><blockquote>
+<p>问题: 后端传过来的数组是一个数组对象，页面中绑定对象中某一具体的属性，当该值变化时调用某个函数，自然想到就是watch方法。但如何watch数组对象中某一个具体的属性，显然不可能一个个属性写watch。</p>
 </blockquote>
-<h2 id="2-VUE生命周期"><a href="#2-VUE生命周期" class="headerlink" title="2.VUE生命周期"></a>2.VUE生命周期</h2><hr>
-<div align="center"><img src="https://cn.vuejs.org/images/lifecycle.png" alt="VUE生命周期"></div>
+<p>解决办法：</p>
+<ol>
+<li><p>watch整个对象，设置deep为true，当该对象发生改变时，调用处理函数。</p>
+</li>
+<li><p>将页面中绑定的属性写在computed函数中，watch这个computed中的函数，当对象值改变时会进入computed函数中，进而进入watch函数中，再调用处理函数。</p>
+</li>
+</ol>
+<h1 id="子组件生命周期执行顺序问题"><a href="#子组件生命周期执行顺序问题" class="headerlink" title="子组件生命周期执行顺序问题"></a>子组件生命周期执行顺序问题</h1><blockquote>
+</blockquote>
+<h1 id="本地开发跨域问题"><a href="#本地开发跨域问题" class="headerlink" title="本地开发跨域问题"></a>本地开发跨域问题</h1><blockquote>
+<p>问题:  在本地开发请求后端服务器接口的时候，都不可避免的会遇到跨域的问题。</p>
+</blockquote>
+<p>解决方法可以通过加一个node中间层或者nginx做反向代理。</p>
+<p>如果是用vue-cli搭建的项目，vue-cli在config中自带了一个proxyTable属性，可以配置这个属性解决跨域的问题。</p>
+<h1 id="父组件控制子组件样式问题"><a href="#父组件控制子组件样式问题" class="headerlink" title="父组件控制子组件样式问题"></a>父组件控制子组件样式问题</h1><p>使用 xx /deep/ xx 或者 xx &gt;&gt;&gt; xx</p>
+<h1 id="对象赋值无法双向绑定"><a href="#对象赋值无法双向绑定" class="headerlink" title="对象赋值无法双向绑定"></a>对象赋值无法双向绑定</h1><p>例如对象obj ={a:1},如果想要修改obj中的a属性，通过obj.a = 2这样赋值，页面不会更新，需使用vue.set方法更改才会起作用， Vue.set(this,obj,a,2);</p>
+<p>同样，如果要给obj增加一个新属性，如果该属性未在data中声明，页面也不会刷新。也就是vue文档中声明的“Vue 不能检测到对象属性的添加或删除”，同样需要使用vue.set方法进行赋值才好使。</p>
 
-<blockquote>
-<ol>
-<li><code>beforeCreate</code> （创建前）vue实例的挂载元素$el和数据对象 data都是undefined, 还未初始化</li>
-<li><code>created (创建后)</code> 完成了 data数据初始化, el还未初始化</li>
-<li><code>beforeMount (载入前)</code> vue实例的$el和data都初始化了, 相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。注意此时还没有挂载html到页面上。</li>
-<li><code>mounted (载入后)</code> 在el 被新创建的 vm.$el替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html页面中。此过程中进行ajax交互</li>
-<li><code>beforeUpdate (更新前)</code> 在数据更新之前调用，发生在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。</li>
-<li><code>updated （更新后）</code> 在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</li>
-<li><code>beforeDestroy</code>  (销毁前） 在实例销毁之前调用。实例仍然完全可用。</li>
-<li><code>destroyed</code> (销毁后） 在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</li>
-</ol>
-</blockquote>
-<h2 id="3-Vue实现数据双向绑定的原理"><a href="#3-Vue实现数据双向绑定的原理" class="headerlink" title="3.Vue实现数据双向绑定的原理"></a>3.Vue实现数据双向绑定的原理</h2><hr>
-<p>vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调</p>
-<blockquote>
-<p>缺陷 </p>
-<ol>
-<li>Object.defineProperty 无法监听数组变化，通过劫持push()pop() shift() unshift() splice() sort() reverse()</li>
-<li>Object.defineProperty 只能劫持对象的属性,因此需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历</li>
-</ol>
-</blockquote>
-<p>Proxy可以直接监听数组的变化</p>
-<p>Proxy可以直接监听对象而非属性</p>
-<h2 id="4-vue-router-路由守卫"><a href="#4-vue-router-路由守卫" class="headerlink" title="4.vue-router 路由守卫"></a>4.vue-router 路由守卫</h2><hr>
-<p><code>全局守卫</code></p>
-<blockquote>
-<ol>
-<li>router.beforeEach 全局前置守卫 进入路由之前</li>
-<li>router.beforeResolve 全局解析守卫(2.5.0+) 在beforeRouteEnter调用之后调用</li>
-<li>router.afterEach 全局后置钩子 进入路由之后</li>
-</ol>
-</blockquote>
-<p><code>路由独享守卫</code></p>
-<ul>
-<li>路由定义是设置</li>
-</ul>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> VueRouter(&#123;</span><br><span class="line">      routes: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="hljs-string">'/foo'</span>,</span><br><span class="line">          component: Foo,</span><br><span class="line">          beforeEnter: <span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =&gt;</span> &#123; </span><br><span class="line">            <span class="hljs-comment">// 参数用法什么的都一样,调用顺序在全局前置守卫后面，所以不会被全局守卫覆盖</span></span><br><span class="line">            <span class="hljs-comment">// ...</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
-<p><code>路由组件内的守卫</code></p>
-<blockquote>
-<ol>
-<li>beforeRouteEnter 进入路由前, 在路由独享守卫后调用 不能 获取组件实例 this，组件实例还没被创建</li>
-<li>beforeRouteUpdate (2.2) 路由复用同一个组件时, 在当前路由改变，但是该组件被复用时调用 可以访问组件实例 this</li>
-<li>beforeRouteLeave 离开当前路由时, 导航离开该组件的对应路由时调用，可以访问组件实例 this</li>
-</ol>
-</blockquote>
-<h2 id="Vue的路由实现：hash模式-和-history模式"><a href="#Vue的路由实现：hash模式-和-history模式" class="headerlink" title="Vue的路由实现：hash模式 和 history模式"></a>Vue的路由实现：hash模式 和 history模式</h2><hr>
-<h3 id="hash模式："><a href="#hash模式：" class="headerlink" title="hash模式："></a>hash模式：</h3><p>在浏览器中符号“#”，#以及#后面的字符称之为hash，用window.location.hash读取；</p>
-<p>特点：hash虽然在URL中，但不被包括在HTTP请求中；用来指导浏览器动作，对服务端安全无用，hash不会重加载页面。</p>
-<p>hash 模式下，仅 hash 符号之前的内容会被包含在请求中，因此对于后端来说，即使没有做到对路由的全覆盖，也不会返回 404 错误。</p>
-<h3 id="history模式："><a href="#history模式：" class="headerlink" title="history模式："></a>history模式：</h3><p>history采用HTML5的新特性；且提供了两个新方法：pushState（），replaceState（）可以对浏览器历史记录栈进行修改，以及popState事件的监听到状态变更。</p>
-<p>history 模式下，前端的 URL 必须和实际向后端发起请求的 URL 一致，如 <a href="http://www.xxx.com/items/id。" target="_blank" rel="noopener">http://www.xxx.com/items/id。</a></p>
-<p>后端如果缺少对 /items/id 的路由处理，将返回 404 错误。</p>
-<p>Vue-Router 官网里如此描述：“不过这种模式要玩好，还需要后台配置支持……所以呢，你要在服务端增加一个覆盖所有情况的候选资源：</p>
-<p>如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，这个页面就是你 app 依赖的页面。</p>
-<h2 id="组件之间的传值通信"><a href="#组件之间的传值通信" class="headerlink" title="组件之间的传值通信"></a>组件之间的传值通信</h2><hr>
-<h3 id="1-父组件给子组件传值"><a href="#1-父组件给子组件传值" class="headerlink" title="1. 父组件给子组件传值"></a>1. 父组件给子组件传值</h3><blockquote>
-<p>使用props，父组件可以使用props向子组件传递数据</p>
-</blockquote>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// parent</span></span><br><span class="line">&lt;child :msg=<span class="hljs-string">"message"</span>&gt;<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span></span></span><br><span class="line"><span class="hljs-comment">// child</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        msg: &#123;</span><br><span class="line">            type: <span class="hljs-built_in">String</span>,</span><br><span class="line">            required: <span class="hljs-literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-子组件向父组件通信"><a href="#2-子组件向父组件通信" class="headerlink" title="2. 子组件向父组件通信"></a>2. 子组件向父组件通信</h3><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 父组件vue模板</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;child @msgFunc=<span class="hljs-string">"func"</span>&gt;<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">child</span>&gt;</span></span></span><br><span class="line">&lt;<span class="hljs-regexp">/template&gt;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">&lt;script&gt;</span></span><br><span class="line"><span class="hljs-regexp">import child from './</span>child.vue<span class="hljs-string">';</span></span><br><span class="line"><span class="hljs-string">export default &#123;</span></span><br><span class="line"><span class="hljs-string">    components: &#123;</span></span><br><span class="line"><span class="hljs-string">        child</span></span><br><span class="line"><span class="hljs-string">    &#125;,</span></span><br><span class="line"><span class="hljs-string">    methods: &#123;</span></span><br><span class="line"><span class="hljs-string">        func (msg) &#123;</span></span><br><span class="line"><span class="hljs-string">            console.log(msg);</span></span><br><span class="line"><span class="hljs-string">        &#125;</span></span><br><span class="line"><span class="hljs-string">    &#125;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 子组件vue模板</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;button @click=<span class="hljs-string">"handleClick"</span>&gt;点我&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">        msg: &#123;</span><br><span class="line">            type: <span class="hljs-built_in">String</span>,</span><br><span class="line">            required: <span class="hljs-literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods () &#123;</span><br><span class="line">        handleClick () &#123;</span><br><span class="line">            <span class="hljs-comment">//........</span></span><br><span class="line">            <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'msgFunc'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="hljs-regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-非父子-兄弟组件之间通信"><a href="#3-非父子-兄弟组件之间通信" class="headerlink" title="3. 非父子, 兄弟组件之间通信"></a>3. 非父子, 兄弟组件之间通信</h3><blockquote>
-<p>使用Bus 或 vuex</p>
-</blockquote>
-<h2 id="VUEX"><a href="#VUEX" class="headerlink" title="VUEX"></a>VUEX</h2><blockquote>
-<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。<br>有 5 种，分别是 state、getter、mutation、action、module<br>vuex 的 store 是什么？<br>vuex 就是一个仓库，仓库里放了很多对象。其中 state 就是数据源存放地，对应于一般 vue 对象里面的 datastate 里面存放的数据是响应式的，vue 组件从 store 读取数据，若是 store 中的数据发生改变，依赖这相数据的组件也会发生更新它通过 mapState 把全局的 state 和 getters 映射到当前组件的 computed 计算属性<br>vuex 的 getter 是什么？<br>getter 可以对 state 进行计算操作，它就是 store 的计算属性虽然在组件内也可以做计算属性，但是 getters 可以在多给件之间复用如果一个状态只在一个组件内使用，是可以不用 getters<br>vuex 的 mutation 是什么？<br>更改Vuex的store中的状态的唯一方法是提交mutation<br>vuex 的 action 是什么？<br>action 类似于 muation, 不同在于：action 提交的是 mutation,而不是直接变更状态action 可以包含任意异步操作<br>vue 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 action 中<br>vuex 的 module 是什么？<br>面对复杂的应用程序，当管理的状态比较多时；我们需要将vuex的store对象分割成模块(modules)。</p>
-</blockquote>
-<h2 id="父子组件加载顺序"><a href="#父子组件加载顺序" class="headerlink" title="父子组件加载顺序"></a>父子组件加载顺序</h2><figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 加载渲染过程</span></span><br><span class="line">&gt;父beforeCreate-&gt;父created-&gt;父beforeMount-&gt;子beforeCreate-&gt;子created-&gt;子beforeMount-&gt;子mounted-&gt;父mounted</span><br></pre></td></tr></table></figure>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 父组件更新过程</span></span><br><span class="line">   父beforeUpdate-&gt;父updated</span><br></pre></td></tr></table></figure>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 子组件更新过程</span></span><br><span class="line">父beforeUpdate-&gt;子beforeUpdate-&gt;子updated-&gt;父updated</span><br></pre></td></tr></table></figure>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 销毁过程</span></span><br><span class="line">父beforeDestroy-&gt;子beforeDestroy-&gt;子destroyed-&gt;父destroyed</span><br></pre></td></tr></table></figure>
         </div>
         
         
@@ -266,7 +198,7 @@
     <div class="card">
     
     <div class="card-image">
-        <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="image is-7by1">
+        <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="image is-7by1">
             <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
         </a>
     </div>
@@ -275,7 +207,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time>
+                <time class="level-item has-text-grey" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time>
                 
                 
                 <span class="level-item has-text-grey">
@@ -290,7 +222,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/06/19/11.JavaScript进阶问题列表/">JavaScript进阶问题列表</a>
+                <a class="has-link-black-ter" href="/2020/01/09/11.JavaScript进阶问题列表/">JavaScript进阶问题列表</a>
             
         </h1>
         <div class="content">
@@ -306,7 +238,65 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/06/19/11.JavaScript进阶问题列表/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/01/09/11.JavaScript进阶问题列表/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/12/09/VUE知识梳理/" class="image is-7by1">
+            <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2188 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/12/09/VUE知识梳理/">VUE知识点梳理</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="1-对于MVVM的理解"><a href="#1-对于MVVM的理解" class="headerlink" title="1.对于MVVM的理解"></a>1.对于MVVM的理解</h2><hr>
+<p><strong>MVVM</strong> 是 <strong>Model-View-ViewModel</strong> 的缩写</p>
+<p><strong>Model</strong>: 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为</p>
+<p><strong>View</strong>: 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View</p>
+<p><strong>ViewModel</strong>： 业务逻辑层，View需要什么数据，ViewModel要提供这个数据；View有某些操作，ViewModel就要响应这些操作，所以可以说它是Model for View.<br>总结： MVVM模式简化了界面与业务的依赖，解决了数据频繁更新<br></p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/12/09/VUE知识梳理/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -416,66 +406,6 @@
                 </div>
             </div>
         </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    <div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-15T02:18:40.000Z">2019-04-15</time>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 分钟 读完 (大约 478 个字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/15/VUE开发中遇到的问题/">VUE开发中遇到的问题</a>
-            
-        </h1>
-        <div class="content">
-            <h1 id="对象数组深度监听"><a href="#对象数组深度监听" class="headerlink" title="对象数组深度监听"></a>对象数组深度监听</h1><blockquote>
-<p>问题: 后端传过来的数组是一个数组对象，页面中绑定对象中某一具体的属性，当该值变化时调用某个函数，自然想到就是watch方法。但如何watch数组对象中某一个具体的属性，显然不可能一个个属性写watch。</p>
-</blockquote>
-<p>解决办法：</p>
-<ol>
-<li><p>watch整个对象，设置deep为true，当该对象发生改变时，调用处理函数。</p>
-</li>
-<li><p>将页面中绑定的属性写在computed函数中，watch这个computed中的函数，当对象值改变时会进入computed函数中，进而进入watch函数中，再调用处理函数。</p>
-</li>
-</ol>
-<h1 id="子组件生命周期执行顺序问题"><a href="#子组件生命周期执行顺序问题" class="headerlink" title="子组件生命周期执行顺序问题"></a>子组件生命周期执行顺序问题</h1><blockquote>
-</blockquote>
-<h1 id="本地开发跨域问题"><a href="#本地开发跨域问题" class="headerlink" title="本地开发跨域问题"></a>本地开发跨域问题</h1><blockquote>
-<p>问题:  在本地开发请求后端服务器接口的时候，都不可避免的会遇到跨域的问题。</p>
-</blockquote>
-<p>解决方法可以通过加一个node中间层或者nginx做反向代理。</p>
-<p>如果是用vue-cli搭建的项目，vue-cli在config中自带了一个proxyTable属性，可以配置这个属性解决跨域的问题。</p>
-<h1 id="父组件控制子组件样式问题"><a href="#父组件控制子组件样式问题" class="headerlink" title="父组件控制子组件样式问题"></a>父组件控制子组件样式问题</h1><p>使用 xx /deep/ xx 或者 xx &gt;&gt;&gt; xx</p>
-<h1 id="对象赋值无法双向绑定"><a href="#对象赋值无法双向绑定" class="headerlink" title="对象赋值无法双向绑定"></a>对象赋值无法双向绑定</h1><p>例如对象obj ={a:1},如果想要修改obj中的a属性，通过obj.a = 2这样赋值，页面不会更新，需使用vue.set方法更改才会起作用， Vue.set(this,obj,a,2);</p>
-<p>同样，如果要给obj增加一个新属性，如果该属性未在data中声明，页面也不会刷新。也就是vue文档中声明的“Vue 不能检测到对象属性的添加或删除”，同样需要使用vue.set方法进行赋值才好使。</p>
-
-        </div>
-        
         
         
     </div>
@@ -958,6 +888,44 @@
         
         <article class="media">
             
+            <a href="/2020/01/10/VUE开发中遇到的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T16:18:40.000Z">2020-01-10</time></div>
+                    <a href="/2020/01/10/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/09/VUE知识梳理/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
@@ -968,25 +936,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time></div>
                     <a href="/2019/12/09/VUE知识梳理/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1032,25 +981,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/15/VUE开发中遇到的问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-15T02:18:40.000Z">2019-04-15</time></div>
-                    <a href="/2019/04/15/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1062,6 +992,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/12/">
@@ -1080,18 +1021,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -1198,6 +1128,44 @@
         
         <article class="media">
             
+            <a href="/2020/01/10/VUE开发中遇到的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T16:18:40.000Z">2020-01-10</time></div>
+                    <a href="/2020/01/10/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/09/VUE知识梳理/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
@@ -1208,25 +1176,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time></div>
                     <a href="/2019/12/09/VUE知识梳理/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -1272,25 +1221,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/15/VUE开发中遇到的问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-15T02:18:40.000Z">2019-04-15</time></div>
-                    <a href="/2019/04/15/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -1302,6 +1232,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/12/">
@@ -1320,18 +1261,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>

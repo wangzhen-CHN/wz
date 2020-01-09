@@ -16,7 +16,7 @@
 <meta property="og:description" content="1.对于MVVM的理解 MVVM 是 Model-View-ViewModel 的缩写 Model: 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为 View: 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View ViewModel： 业务逻辑层，View需要什么数据，V">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1">
-<meta property="og:updated_time" content="2020-01-09T17:56:26.647Z">
+<meta property="og:updated_time" content="2020-01-09T18:12:44.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="VUE知识点梳理">
 <meta name="twitter:description" content="1.对于MVVM的理解 MVVM 是 Model-View-ViewModel 的缩写 Model: 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为 View: 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View ViewModel： 业务逻辑层，View需要什么数据，V">
@@ -157,7 +157,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分钟 读完 (大约 2187 个字)
+                    15 分钟 读完 (大约 2188 个字)
                 </span>
                 
                 
@@ -174,8 +174,7 @@
 <p><strong>MVVM</strong> 是 <strong>Model-View-ViewModel</strong> 的缩写</p>
 <p><strong>Model</strong>: 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为</p>
 <p><strong>View</strong>: 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View</p>
-<p><strong>ViewModel</strong>： 业务逻辑层，View需要什么数据，ViewModel要提供这个数据；View有某些操作，ViewModel就要响应这些操作，所以可以说它是Model for View.<br>总结： MVVM模式简化了界面与业务的依赖，解决了数据频繁更新</p>
-<p>MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</p>
+<p><strong>ViewModel</strong>： 业务逻辑层，View需要什么数据，ViewModel要提供这个数据；View有某些操作，ViewModel就要响应这些操作，所以可以说它是Model for View.<br>总结： MVVM模式简化了界面与业务的依赖，解决了数据频繁更新<br><a id="more"></a><br>MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</p>
 <blockquote>
 <p>MVVM的缺点<br>1.Bug很难被调试: 因为使用双向绑定的模式，当你看到界面异常了，有可能是你View的代码有Bug，也可能是Model的代码有问题。<br>2.一个大的模块中model也会很大，虽然使用方便了也很容易保证了数据的一致性，当时长期持有，不释放内存就造成了花费更多的内存<br>3.对于大型的图形应用程序，视图状态较多，ViewModel的构建和维护的成本都会比较高</p>
 </blockquote>
@@ -310,10 +309,17 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/01/09/11.JavaScript进阶问题列表/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">JavaScript进阶问题列表</span>
+            </a>
+        </div>
+        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/19/11.JavaScript进阶问题列表/">
-                <span class="level-item">JavaScript进阶问题列表</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/06/18/10.ESlint报错解决方案/">
+                <span class="level-item">ESlint报错解决方案</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -532,6 +538,44 @@
         
         <article class="media">
             
+            <a href="/2020/01/10/VUE开发中遇到的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T16:18:40.000Z">2020-01-10</time></div>
+                    <a href="/2020/01/10/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/09/VUE知识梳理/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
@@ -542,25 +586,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time></div>
                     <a href="/2019/12/09/VUE知识梳理/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -606,25 +631,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/15/VUE开发中遇到的问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-15T02:18:40.000Z">2019-04-15</time></div>
-                    <a href="/2019/04/15/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -636,6 +642,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/12/">
@@ -654,18 +671,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
@@ -772,6 +778,44 @@
         
         <article class="media">
             
+            <a href="/2020/01/10/VUE开发中遇到的问题/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T16:18:40.000Z">2020-01-10</time></div>
+                    <a href="/2020/01/10/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/12/09/VUE知识梳理/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="VUE知识点梳理">
@@ -782,25 +826,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T12:55:59.000Z">2019-12-09</time></div>
                     <a href="/2019/12/09/VUE知识梳理/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="https://user-gold-cdn.xitu.io/2020/1/8/16f84f0460abc988?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1" alt="JavaScript进阶问题列表">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
-                    <a href="/2019/06/19/11.JavaScript进阶问题列表/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
                     <p class="is-size-7 is-uppercase">
                         
                     </p>
@@ -846,25 +871,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/2019/04/15/VUE开发中遇到的问题/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="VUE开发中遇到的问题">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-04-15T02:18:40.000Z">2019-04-15</time></div>
-                    <a href="/2019/04/15/VUE开发中遇到的问题/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
-                    <p class="is-size-7 is-uppercase">
-                        
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -876,6 +882,17 @@
             归档
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2019/12/">
@@ -894,18 +911,7 @@
                     <span class="level-item">六月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">四月 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
+                    <span class="level-item tag">2</span>
                 </span>
             </a>
         </li>
