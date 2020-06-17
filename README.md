@@ -1,3 +1,5 @@
+此分支为源码分支
+项目发布在master分支
 ### 启动    hexo s(server)
 ### 打包    hexo g(generate)
 ### 发布    hexo d(deploy)
