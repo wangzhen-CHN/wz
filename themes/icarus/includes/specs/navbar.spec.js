@@ -23,7 +23,7 @@ module.exports = {
         [doc]: 'Navigation bar links to be shown on the right',
         [defaultValue]: {
             'Download on GitHub': {
-                icon: 'fab fa-github',
+                icon: 'fa fa-github',
                 url: 'https://github.com/ppoffice/hexo-theme-icarus'
             }
         }

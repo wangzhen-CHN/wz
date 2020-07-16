@@ -8,15 +8,15 @@ module.exports = {
         [doc]: 'Links to be shown on the right of the footer section',
         [defaultValue]: {
             'Creative Commons': {
-                icon: 'fab fa-creative-commons',
+                icon: 'fa fa-creative-commons',
                 url: 'https://creativecommons.org/'
             },
             'Attribution 4.0 International': {
-                icon: 'fab fa-creative-commons-by',
+                icon: 'fa fa-creative-commons-by',
                 url: 'https://creativecommons.org/licenses/by/4.0/'
             },
             'Download on GitHub': {
-                icon: 'fab fa-github',
+                icon: 'fa',
                 url: 'https://github.com/ppoffice/hexo-theme-icarus'
             }
         }

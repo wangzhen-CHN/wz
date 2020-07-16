@@ -2,6 +2,9 @@
 <html <%- has_config('language') ? ' lang="' + get_config('language').substring(0, 2) + '"' : '' %>>
 <head>
     <%- partial('common/head') %>
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
 </head>
 <body class="is-<%= column_count() %>-column">
     <%- partial('common/navbar', { page }) %>

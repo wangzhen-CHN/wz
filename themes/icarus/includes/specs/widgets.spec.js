@@ -13,19 +13,19 @@ const DEFAULT_WIDGETS = [
         follow_link: 'https://github.com/wangzhen-CHN',
         social_links: {
             Github: {
-                icon: 'fab fa-github',
+                icon: 'fa fa-github',
                 url: 'https://github.com/wangzhen-CHN'
             },
             Facebook: {
-                icon: 'fab fa-facebook',
+                icon: 'fa fa-facebook',
                 url: 'https://facebook.com'
             },
             Twitter: {
-                icon: 'fab fa-twitter',
+                icon: 'fa fa-twitter',
                 url: 'https://twitter.com'
             },
             Dribbble: {
-                icon: 'fab fa-dribbble',
+                icon: 'fa fa-dribbble',
                 url: 'https://dribbble.com'
             },
             RSS: {

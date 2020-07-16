@@ -2,7 +2,7 @@
 title: VUE知识点梳理
 date: 2020-01-09 19:41:52
 tags: VUE
-thumbnail: "https://user-gold-cdn.xitu.io/2020/1/7/16f7dd62944f6c43?imageView2/1/w/1304/h/734/q/85/format/webp/interlace/1"
+thumbnail: "http://img.mo36.com/vue.png"
 ---
 ## 1.对于MVVM的理解
 ---
