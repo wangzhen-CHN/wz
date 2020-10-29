@@ -5,7 +5,7 @@ const DEFAULT_WIDGETS = [
         type: 'profile',
         position: 'left',
         author: '汪振',
-        author_title: 'Your title',
+        author_title: '前端coder',
         location: 'ShangHai CHINA',
         avatar: null,
         gravatar: null,
