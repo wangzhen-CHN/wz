@@ -4,92 +4,15 @@ date: 2020-07-16 10:40:14
 tags: Promise
 thumbnail: "http://img.coder.wang/Promise.png"
 ---
-
-#### 1. Promise 的基本特征：
-
-> 1. promise 有三个状态：pending，fulfilled，or rejected；「规范 Promise/A+ 2.1」
-> 2. new promise时， 需要传递一个executor()执行器，执行器立即执行；
-> 3. executor接受两个参数，分别是resolve和reject；.
-> 4. promise  的默认状态是 pending；
-> 5. promise 有一个value保存成功状态的值，可以是undefined/thenable/promise；「规范 Promise/A+ 1.3」
-> 6. promise 有一个reason保存失败状态的值；「规范 Promise/A+ 1.5」
-> 7. promise 只能从pending到rejected, 或者从pending到fulfilled，状态一旦确认，就不会再改变；
-> 8. promise 必须有一个then方法，then 接收两个参数，分别是 promise 成功的回调 onFulfilled, 和 promise 失败的回调 onRejected；「规范 Promise/A+ 2.2」
-> 9. 如果调用 then 时，promise 已经成功，则执行onFulfilled，参数是promise的value；
-> 10. 如果调用 then 时，promise 已经失败，那么执行onRejected, 参数是promise的reason；
-> 11. 如果 then 中抛出了异常，那么就会把这个异常作为参数，传递给下一个 then 的失败的回调onRejected；
-
+...
 <!-- more -->
-
-#### 2. 简单实现
-
-```js
-// 三个状态：PENDING、FULFILLED、REJECTED
-const PENDING = 'PENDING';
-const FULFILLED = 'FULFILLED';
-const REJECTED = 'REJECTED';
-
-class Promise {
-  constructor(executor) {
-    // 默认状态为 PENDING
-    this.status = PENDING;
-    // 存放成功状态的值，默认为 undefined
-    this.value = undefined;
-    // 存放失败状态的值，默认为 undefined
-    this.reason = undefined;
-
-    // 调用此方法就是成功
-    let resolve = (value) => {
-      // 状态为 PENDING 时才可以更新状态，防止 executor 中调用了两次 resovle/reject 方法
-      if(this.status ===  PENDING) {
-        this.status = FULFILLED;
-        this.value = value;
-      }
-    } 
-
-    // 调用此方法就是失败
-    let reject = (reason) => {
-      // 状态为 PENDING 时才可以更新状态，防止 executor 中调用了两次 resovle/reject 方法
-      if(this.status ===  PENDING) {
-        this.status = REJECTED;
-        this.reason = reason;
-      }
-    }
-
-    try {
-      // 立即执行，将 resolve 和 reject 函数传给使用者  
-      executor(resolve,reject)
-    } catch (error) {
-      // 发生异常时执行失败逻辑
-      reject(error)
-    }
-  }
-
-  // 包含一个 then 方法，并接收两个参数 onFulfilled、onRejected
-  then(onFulfilled, onRejected) {
-    if (this.status === FULFILLED) {
-      onFulfilled(this.value)
-    }
-
-    if (this.status === REJECTED) {
-      onRejected(this.reason)
-    }
-  }
-}
-
-```
-
-#### 3. 测试
-
-```js
-const promise = new Promise((resolve, reject) => {
-  resolve('成功');
-}).then(
-  (data) => {
-    console.log('success', data)
-  },
-  (err) => {
-    console.log('faild', err)
-  }
-)
-```
+<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; padding: 0 10px; word-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; line-height: 1.25; color: #2b2b2b; font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light; letter-spacing: 2px; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center;"><h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">1. Promise 的基本特征：</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2>
+<blockquote class="multiquote-1" data-tool="mdnice编辑器" style="display: block; font-size: 0.9em; overflow: auto; overflow-scrolling: touch; padding-top: 10px; padding-bottom: 10px; padding-left: 20px; padding-right: 10px; margin-bottom: 20px; margin-top: 20px; text-size-adjust: 100%; line-height: 1.55em; font-weight: 400; border-radius: 6px; color: #595959; font-style: normal; text-align: left; box-sizing: inherit; border-left: none; border: 1px solid RGBA(64, 184, 250, .4); background: RGBA(64, 184, 250, .1);"><span style="color: RGBA(64, 184, 250, .5); font-size: 34px; line-height: 1; font-weight: 700;">❝</span>
+<ol style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; list-style-type: decimal; font-size: 15px; color: #595959;">
+<li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有三个状态：pending，fulfilled，or rejected；「规范 Promise/A+ 2.1」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">new promise时， 需要传递一个executor()执行器，执行器立即执行；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">executor接受两个参数，分别是resolve和reject；.</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise  的默认状态是 pending；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有一个value保存成功状态的值，可以是undefined/thenable/promise；「规范 Promise/A+ 1.3」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有一个reason保存失败状态的值；「规范 Promise/A+ 1.5」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 只能从pending到rejected, 或者从pending到fulfilled，状态一旦确认，就不会再改变；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 必须有一个then方法，then 接收两个参数，分别是 promise 成功的回调 onFulfilled, 和 promise 失败的回调 onRejected；「规范 Promise/A+ 2.2」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果调用 then 时，promise 已经成功，则执行onFulfilled，参数是promise的value；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果调用 then 时，promise 已经失败，那么执行onRejected, 参数是promise的reason；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果 then 中抛出了异常，那么就会把这个异常作为参数，传递给下一个 then 的失败的回调onRejected；</section></li></ol>
+<span style="float: right; color: RGBA(64, 184, 250, .5);">❞</span></blockquote>
+<h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">2. 简单实现</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://files.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; letter-spacing: 0px; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;三个状态：PENDING、FULFILLED、REJECTED</span><br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span>&nbsp;PENDING&nbsp;=&nbsp;<span class="hljs-string" style="color: #98c379; line-height: 26px;">'PENDING'</span>;<br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span>&nbsp;FULFILLED&nbsp;=&nbsp;<span class="hljs-string" style="color: #98c379; line-height: 26px;">'FULFILLED'</span>;<br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span>&nbsp;REJECTED&nbsp;=&nbsp;<span class="hljs-string" style="color: #98c379; line-height: 26px;">'REJECTED'</span>;<br><br><span class="hljs-class" style="line-height: 26px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">class</span>&nbsp;<span class="hljs-title" style="color: #e6c07b; line-height: 26px;">Promise</span>&nbsp;</span>{<br>&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">constructor</span>(executor)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;默认状态为&nbsp;PENDING</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;=&nbsp;PENDING;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;存放成功状态的值，默认为&nbsp;undefined</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value&nbsp;=&nbsp;<span class="hljs-literal" style="color: #56b6c2; line-height: 26px;">undefined</span>;<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;存放失败状态的值，默认为&nbsp;undefined</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason&nbsp;=&nbsp;<span class="hljs-literal" style="color: #56b6c2; line-height: 26px;">undefined</span>;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;调用此方法就是成功</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">let</span>&nbsp;resolve&nbsp;=&nbsp;<span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">value</span>)&nbsp;=&gt;</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;状态为&nbsp;PENDING&nbsp;时才可以更新状态，防止&nbsp;executor&nbsp;中调用了两次&nbsp;resovle/reject&nbsp;方法</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;===&nbsp;&nbsp;PENDING)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;=&nbsp;FULFILLED;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value&nbsp;=&nbsp;value;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;调用此方法就是失败</span><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">let</span>&nbsp;reject&nbsp;=&nbsp;<span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">reason</span>)&nbsp;=&gt;</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;状态为&nbsp;PENDING&nbsp;时才可以更新状态，防止&nbsp;executor&nbsp;中调用了两次&nbsp;resovle/reject&nbsp;方法</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;===&nbsp;&nbsp;PENDING)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;=&nbsp;REJECTED;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason&nbsp;=&nbsp;reason;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">try</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;立即执行，将&nbsp;resolve&nbsp;和&nbsp;reject&nbsp;函数传给使用者&nbsp;&nbsp;</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;executor(resolve,reject)<br>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">catch</span>&nbsp;(error)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;发生异常时执行失败逻辑</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reject(error)<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;<span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">//&nbsp;包含一个&nbsp;then&nbsp;方法，并接收两个参数&nbsp;onFulfilled、onRejected</span><br>&nbsp;&nbsp;then(onFulfilled,&nbsp;onRejected)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>&nbsp;(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;===&nbsp;FULFILLED)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onFulfilled(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value)<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>&nbsp;(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status&nbsp;===&nbsp;REJECTED)&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onRejected(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason)<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>&nbsp;&nbsp;}<br>}<br><br></code></pre>
+<h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">3. 测试</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://files.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; letter-spacing: 0px; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span>&nbsp;promise&nbsp;=&nbsp;<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">new</span>&nbsp;<span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Promise</span>(<span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">resolve,&nbsp;reject</span>)&nbsp;=&gt;</span>&nbsp;{<br>&nbsp;&nbsp;resolve(<span class="hljs-string" style="color: #98c379; line-height: 26px;">'成功'</span>);<br>}).then(<br>&nbsp;&nbsp;<span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">data</span>)&nbsp;=&gt;</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">'success'</span>,&nbsp;data)<br>&nbsp;&nbsp;},<br>&nbsp;&nbsp;(err)&nbsp;=&gt;&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;<span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">'faild'</span>,&nbsp;err)<br>&nbsp;&nbsp;}<br>)<br></code></pre>
+</section>

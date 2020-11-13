@@ -15,7 +15,7 @@ common:
     next: '下一页'
 widget:
     follow: 'wangzhen-CHN'
-    recents: '最新文章'
+    recents: '文章列表'
     links: '链接'
     tag_cloud: '标签云'
     catalogue: '目录'
