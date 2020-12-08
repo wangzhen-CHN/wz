@@ -12,8 +12,23 @@ tags: VUE
 2. 将页面中绑定的属性写在computed函数中，watch这个computed中的函数，当对象值改变时会进入computed函数中，进而进入watch函数中，再调用处理函数。
 <!-- more -->
 # 子组件生命周期执行顺序问题
->
-a
+
+组件的调用顺序都是先父后子,渲染完成的顺序是先子后父。
+
+组件的销毁操作是先父后子，销毁完成的顺序是先子后父。
+
+加载渲染过程
+父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount- >子mounted->父mounted
+
+子组件更新过程
+父beforeUpdate->子beforeUpdate->子updated->父updated
+
+父组件更新过程
+父 beforeUpdate -> 父 updated
+
+销毁过程
+父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
+
 
 # 本地开发跨域问题
 >问题:  在本地开发请求后端服务器接口的时候，都不可避免的会遇到跨域的问题。
@@ -31,3 +46,16 @@ a
 例如对象obj ={a:1},如果想要修改obj中的a属性，通过obj.a = 2这样赋值，页面不会更新，需使用vue.set方法更改才会起作用， Vue.set(this,obj,a,2);
 
 同样，如果要给obj增加一个新属性，如果该属性未在data中声明，页面也不会刷新。也就是vue文档中声明的“Vue 不能检测到对象属性的添加或删除”，同样需要使用vue.set方法进行赋值才好使。
+
+# Vue事件总线（eventBus）$on()会多次触发解决办法
+
+>问题:注册的总线事件（Bus）,页面没有强制刷新，存在组件切换，bus.$on方法会被多次绑定，造成触发一次但多个响应的情况
+
+解决办法就是在利用$on 接收事件的组件的beforeDestroy或destroy周期中将事件进行销毁，使用$off()
+```js
+beforeDestroy () {
+　　bus.$off('BUS_NAME')
+}
+```
+附上github上Vue作者尤大大关于这问题的解答：
+https://github.com/vuejs/vue/issues/3399

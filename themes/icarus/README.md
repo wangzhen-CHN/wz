@@ -92,7 +92,7 @@ per-page basis with the ability to merge and override partial configurations.
     <tr>
         <td>
             <pre>menu:
-    Archives: /archives
+    Archives: /
     Categories: /categories
     Tags: /tags
     About: /about</pre>
