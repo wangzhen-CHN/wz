@@ -52,11 +52,6 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <%- list_tags(post.tags, {
-                        class: 'has-link-grey ',
-                        show_count: false,
-                        style: 'link'
-                    }) %>
                 </div>
             </div>
         </div>
@@ -99,7 +94,7 @@
         <% if (post.prev){ %>
         <div class="level-start">
             <a class="level level-item has-link-grey <%= !post.prev ? 'is-hidden-mobile' : '' %> article-nav-prev" href="<%- url_for(post.prev.path) %>">
-                <i class="level-item fas fa-chevron-left"></i>
+                <i class="level-item fa fa-chevron-left"></i>
                 <span class="level-item"><%= post.prev.title %></span>
             </a>
         </div>
@@ -108,7 +103,7 @@
         <div class="level-end">
             <a class="level level-item has-link-grey <%= !post.next ? 'is-hidden-mobile' : '' %> article-nav-next" href="<%- url_for(post.next.path) %>">
                 <span class="level-item"><%= post.next.title %></span>
-                <i class="level-item fas fa-chevron-right"></i>
+                <i class="level-item fa fa-chevron-right"></i>
             </a>
         </div>
         <% } %>

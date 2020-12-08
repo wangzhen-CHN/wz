@@ -67,29 +67,29 @@ comment:
     type: 
 # Donation entries
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Donation/
-donate:
-    -
-        # Donation entry name
-        type: alipay
-        # Qrcode image URL
-        qrcode: ''
-    -
-        # Donation entry name
-        type: wechat
-        # Qrcode image URL
-        qrcode: ''
-    -
-        # Donation entry name
-        type: paypal
-        # Paypal business ID or email address
-        business: ''
-        # Currency code
-        currency_code: USD
-    -
-        # Donation entry name
-        type: patreon
-        # URL to the Patreon page
-        url: ''
+# donate:
+#     -
+#         # Donation entry name
+#         type: alipay
+#         # Qrcode image URL
+#         qrcode: ''
+#     -
+#         # Donation entry name
+#         type: wechat
+#         # Qrcode image URL
+#         qrcode: ''
+#     -
+#         # Donation entry name
+#         type: paypal
+#         # Paypal business ID or email address
+#         business: ''
+#         # Currency code
+#         currency_code: USD
+#     -
+#         # Donation entry name
+#         type: patreon
+#         # URL to the Patreon page
+#         url: ''
 # Share plugin settings
 # https://ppoffice.github.io/hexo-theme-icarus/categories/Plugins/Share
 share:
