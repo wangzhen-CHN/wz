@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>VUE知识点梳理 - 等一个人</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="1.对于MVVM的理解 MVVM 是 Model-View-ViewModel 的缩写  Model : 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为 View : 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View ViewModel ： 业务逻辑层，View需要什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE知识点梳理">
+<meta property="og:url" content="http://coder.wang/2020/01/09/VUE%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:site_name" content="等一个人">
+<meta property="og:description" content="1.对于MVVM的理解 MVVM 是 Model-View-ViewModel 的缩写  Model : 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为 View : 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View ViewModel ： 业务逻辑层，View需要什么">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.coder.wang/vue.png">
+<meta property="article:published_time" content="2020-01-09T11:41:52.000Z">
+<meta property="article:modified_time" content="2020-12-07T10:02:06.792Z">
+<meta property="article:author" content="汪振">
+<meta property="article:tag" content="VUE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.coder.wang/vue.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"> -->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous"> -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.2.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="VUE知识点梳理" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">首页</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fa fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img.coder.wang/vue.png" alt="VUE知识点梳理">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分钟 读完 (大约 2188 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                VUE知识点梳理
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h2 id="1-对于MVVM的理解"><a href="#1-对于MVVM的理解" class="headerlink" title="1.对于MVVM的理解"></a>1.对于MVVM的理解</h2><hr>
+<p><strong>MVVM</strong> 是 <strong>Model-View-ViewModel</strong> 的缩写 </p>
+<p><code>Model</code> : 代表数据模型，也可以在Model中定义数据修改和操作的业务逻辑。我们可以把Model称为数据层，因为它仅仅关注数据本身，不关心任何行为</p>
+<p><code>View</code> : 用户操作界面。当ViewModel对Model进行更新的时候，会通过数据绑定更新到View</p>
+<p><code>ViewModel</code> ： 业务逻辑层，View需要什么数据，ViewModel要提供这个数据；View有某些操作，ViewModel就要响应这些操作，所以可以说它是Model for View.<br>总结： MVVM模式简化了界面与业务的依赖，解决了数据频繁更新<br><a id="more"></a><br>MVVM 在使用当中，利用双向绑定技术，使得 Model 变化时，ViewModel 会自动更新，而 ViewModel 变化时，View 也会自动变化。</p>
+<blockquote>
+<p>MVVM的缺点<br>1.Bug很难被调试: 因为使用双向绑定的模式，当你看到界面异常了，有可能是你View的代码有Bug，也可能是Model的代码有问题。<br>2.一个大的模块中model也会很大，虽然使用方便了也很容易保证了数据的一致性，当时长期持有，不释放内存就造成了花费更多的内存<br>3.对于大型的图形应用程序，视图状态较多，ViewModel的构建和维护的成本都会比较高</p>
+</blockquote>
+<h2 id="2-VUE生命周期"><a href="#2-VUE生命周期" class="headerlink" title="2.VUE生命周期"></a>2.VUE生命周期</h2><hr>
+<div align="center"><img src="https://cn.vuejs.org/images/lifecycle.png" alt="VUE生命周期"></div>
+
+<blockquote>
+<ol>
+<li><code>beforeCreate</code> （创建前）vue实例的挂载元素$el和数据对象 data都是undefined, 还未初始化</li>
+<li><code>created (创建后)</code> 完成了 data数据初始化, el还未初始化</li>
+<li><code>beforeMount (载入前)</code> vue实例的$el和data都初始化了, 相关的render函数首次被调用。实例已完成以下的配置：编译模板，把data里面的数据和模板生成html。注意此时还没有挂载html到页面上。</li>
+<li><code>mounted (载入后)</code> 在el 被新创建的 vm.$el替换，并挂载到实例上去之后调用。实例已完成以下的配置：用上面编译好的html内容替换el属性指向的DOM对象。完成模板中的html渲染到html页面中。此过程中进行ajax交互</li>
+<li><code>beforeUpdate (更新前)</code> 在数据更新之前调用，发生在虚拟DOM重新渲染和打补丁之前。可以在该钩子中进一步地更改状态，不会触发附加的重渲染过程。</li>
+<li><code>updated （更新后）</code> 在由于数据更改导致的虚拟DOM重新渲染和打补丁之后调用。调用时，组件DOM已经更新，所以可以执行依赖于DOM的操作。然而在大多数情况下，应该避免在此期间更改状态，因为这可能会导致更新无限循环。该钩子在服务器端渲染期间不被调用。</li>
+<li><code>beforeDestroy</code>  (销毁前） 在实例销毁之前调用。实例仍然完全可用。</li>
+<li><code>destroyed</code> (销毁后） 在实例销毁之后调用。调用后，所有的事件监听器会被移除，所有的子实例也会被销毁。该钩子在服务器端渲染期间不被调用。</li>
+</ol>
+</blockquote>
+<h2 id="3-Vue实现数据双向绑定的原理"><a href="#3-Vue实现数据双向绑定的原理" class="headerlink" title="3.Vue实现数据双向绑定的原理"></a>3.Vue实现数据双向绑定的原理</h2><hr>
+<p>vue.js 是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调</p>
+<blockquote>
+<p>缺陷 </p>
+<ol>
+<li>Object.defineProperty 无法监听数组变化，通过劫持push()pop() shift() unshift() splice() sort() reverse()</li>
+<li>Object.defineProperty 只能劫持对象的属性,因此需要对每个对象的每个属性进行遍历，如果属性值也是对象那么需要深度遍历</li>
+</ol>
+</blockquote>
+<p>Proxy可以直接监听数组的变化</p>
+<p>Proxy可以直接监听对象而非属性</p>
+<h2 id="4-vue-router-路由守卫"><a href="#4-vue-router-路由守卫" class="headerlink" title="4.vue-router 路由守卫"></a>4.vue-router 路由守卫</h2><hr>
+<p><code>全局守卫</code></p>
+<blockquote>
+<ol>
+<li>router.beforeEach 全局前置守卫 进入路由之前</li>
+<li>router.beforeResolve 全局解析守卫(2.5.0+) 在beforeRouteEnter调用之后调用</li>
+<li>router.afterEach 全局后置钩子 进入路由之后</li>
+</ol>
+</blockquote>
+<p><code>路由独享守卫</code></p>
+<ul>
+<li>路由定义是设置</li>
+</ul>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> router = <span class="hljs-keyword">new</span> VueRouter({</span><br><span class="line">      routes: [</span><br><span class="line">        {</span><br><span class="line">          path: <span class="hljs-string">'/foo'</span>,</span><br><span class="line">          component: Foo,</span><br><span class="line">          beforeEnter: <span class="hljs-function">(<span class="hljs-params">to, <span class="hljs-keyword">from</span>, next</span>) =></span> { </span><br><span class="line">            <span class="hljs-comment">// 参数用法什么的都一样,调用顺序在全局前置守卫后面，所以不会被全局守卫覆盖</span></span><br><span class="line">            <span class="hljs-comment">// ...</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    })</span><br></pre></td></tr></tbody></table></figure>
+<p><code>路由组件内的守卫</code></p>
+<blockquote>
+<ol>
+<li>beforeRouteEnter 进入路由前, 在路由独享守卫后调用 不能 获取组件实例 this，组件实例还没被创建</li>
+<li>beforeRouteUpdate (2.2) 路由复用同一个组件时, 在当前路由改变，但是该组件被复用时调用 可以访问组件实例 this</li>
+<li>beforeRouteLeave 离开当前路由时, 导航离开该组件的对应路由时调用，可以访问组件实例 this</li>
+</ol>
+</blockquote>
+<h2 id="Vue的路由实现：hash模式-和-history模式"><a href="#Vue的路由实现：hash模式-和-history模式" class="headerlink" title="Vue的路由实现：hash模式 和 history模式"></a>Vue的路由实现：hash模式 和 history模式</h2><hr>
+<h3 id="hash模式："><a href="#hash模式：" class="headerlink" title="hash模式："></a>hash模式：</h3><p>在浏览器中符号“#”，#以及#后面的字符称之为hash，用window.location.hash读取；</p>
+<p>特点：hash虽然在URL中，但不被包括在HTTP请求中；用来指导浏览器动作，对服务端安全无用，hash不会重加载页面。</p>
+<p>hash 模式下，仅 hash 符号之前的内容会被包含在请求中，因此对于后端来说，即使没有做到对路由的全覆盖，也不会返回 404 错误。</p>
+<h3 id="history模式："><a href="#history模式：" class="headerlink" title="history模式："></a>history模式：</h3><p>history采用HTML5的新特性；且提供了两个新方法：pushState（），replaceState（）可以对浏览器历史记录栈进行修改，以及popState事件的监听到状态变更。</p>
+<p>history 模式下，前端的 URL 必须和实际向后端发起请求的 URL 一致，如 <a href="http://www.xxx.com/items/id。" target="_blank" rel="noopener">http://www.xxx.com/items/id。</a></p>
+<p>后端如果缺少对 /items/id 的路由处理，将返回 404 错误。</p>
+<p>Vue-Router 官网里如此描述：“不过这种模式要玩好，还需要后台配置支持……所以呢，你要在服务端增加一个覆盖所有情况的候选资源：</p>
+<p>如果 URL 匹配不到任何静态资源，则应该返回同一个 index.html 页面，这个页面就是你 app 依赖的页面。</p>
+<h2 id="组件之间的传值通信"><a href="#组件之间的传值通信" class="headerlink" title="组件之间的传值通信"></a>组件之间的传值通信</h2><hr>
+<h3 id="1-父组件给子组件传值"><a href="#1-父组件给子组件传值" class="headerlink" title="1. 父组件给子组件传值"></a>1. 父组件给子组件传值</h3><blockquote>
+<p>使用props，父组件可以使用props向子组件传递数据</p>
+</blockquote>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// parent</span></span><br><span class="line"><child :msg=<span class="hljs-string">"message"</span>><<span class="hljs-regexp">/child></span></span><br><span class="line"><span class="hljs-regexp">/</span><span class="hljs-regexp">/ child</span></span><br><span class="line"><span class="hljs-regexp">export default {</span></span><br><span class="line"><span class="hljs-regexp">    props: {</span></span><br><span class="line"><span class="hljs-regexp">        msg: {</span></span><br><span class="line"><span class="hljs-regexp">            type: String,</span></span><br><span class="line"><span class="hljs-regexp">            required: true</span></span><br><span class="line"><span class="hljs-regexp">        }</span></span><br><span class="line"><span class="hljs-regexp">    }</span></span><br><span class="line"><span class="hljs-regexp">}</span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="2-子组件向父组件通信"><a href="#2-子组件向父组件通信" class="headerlink" title="2. 子组件向父组件通信"></a>2. 子组件向父组件通信</h3><figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 父组件vue模板</span></span><br><span class="line"><template></span><br><span class="line">    <child @msgFunc=<span class="hljs-string">"func"</span>><<span class="hljs-regexp">/child></span></span><br><span class="line"><span class="hljs-regexp"></</span>template></span><br><span class="line"></span><br><span class="line"><script></span><br><span class="line"><span class="hljs-keyword">import</span> child <span class="hljs-keyword">from</span> <span class="hljs-string">'./child.vue'</span>;</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">    components: {</span><br><span class="line">        child</span><br><span class="line">    },</span><br><span class="line">    methods: {</span><br><span class="line">        func (msg) {</span><br><span class="line">            <span class="hljs-built_in">console</span>.log(msg);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><<span class="hljs-regexp">/script></span></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 子组件vue模板</span></span><br><span class="line"><template></span><br><span class="line">    <button @click=<span class="hljs-string">"handleClick"</span>>点我<<span class="hljs-regexp">/button></span></span><br><span class="line"><span class="hljs-regexp"></</span>template></span><br><span class="line"></span><br><span class="line"><script></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span><br><span class="line">    props: {</span><br><span class="line">        msg: {</span><br><span class="line">            type: <span class="hljs-built_in">String</span>,</span><br><span class="line">            required: <span class="hljs-literal">true</span></span><br><span class="line">        }</span><br><span class="line">    },</span><br><span class="line">    methods () {</span><br><span class="line">        handleClick () {</span><br><span class="line">            <span class="hljs-comment">//........</span></span><br><span class="line">            <span class="hljs-keyword">this</span>.$emit(<span class="hljs-string">'msgFunc'</span>);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><<span class="hljs-regexp">/script></span></span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-非父子-兄弟组件之间通信"><a href="#3-非父子-兄弟组件之间通信" class="headerlink" title="3. 非父子, 兄弟组件之间通信"></a>3. 非父子, 兄弟组件之间通信</h3><blockquote>
+<p>使用Bus 或 vuex</p>
+</blockquote>
+<h2 id="VUEX"><a href="#VUEX" class="headerlink" title="VUEX"></a>VUEX</h2><blockquote>
+<p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式。<br>有 5 种，分别是 state、getter、mutation、action、module<br>vuex 的 store 是什么？<br>vuex 就是一个仓库，仓库里放了很多对象。其中 state 就是数据源存放地，对应于一般 vue 对象里面的 datastate 里面存放的数据是响应式的，vue 组件从 store 读取数据，若是 store 中的数据发生改变，依赖这相数据的组件也会发生更新它通过 mapState 把全局的 state 和 getters 映射到当前组件的 computed 计算属性<br>vuex 的 getter 是什么？<br>getter 可以对 state 进行计算操作，它就是 store 的计算属性虽然在组件内也可以做计算属性，但是 getters 可以在多给件之间复用如果一个状态只在一个组件内使用，是可以不用 getters<br>vuex 的 mutation 是什么？<br>更改Vuex的store中的状态的唯一方法是提交mutation<br>vuex 的 action 是什么？<br>action 类似于 muation, 不同在于：action 提交的是 mutation,而不是直接变更状态action 可以包含任意异步操作<br>vue 中 ajax 请求代码应该写在组件的 methods 中还是 vuex 的 action 中<br>vuex 的 module 是什么？<br>面对复杂的应用程序，当管理的状态比较多时；我们需要将vuex的store对象分割成模块(modules)。</p>
+</blockquote>
+<h2 id="父子组件加载顺序"><a href="#父子组件加载顺序" class="headerlink" title="父子组件加载顺序"></a>父子组件加载顺序</h2><figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 加载渲染过程</span></span><br><span class="line">>父beforeCreate->父created->父beforeMount->子beforeCreate->子created->子beforeMount->子mounted->父mounted</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 父组件更新过程</span></span><br><span class="line">   父beforeUpdate->父updated</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 子组件更新过程</span></span><br><span class="line">父beforeUpdate->子beforeUpdate->子updated->父updated</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 销毁过程</span></span><br><span class="line">父beforeDestroy->子beforeDestroy->子destroyed->父destroyed</span><br></pre></td></tr></tbody></table></figure></body></html>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/02/18/%E8%B7%A8%E5%9F%9F%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">跨域及解决方案</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+                <span class="level-item">VUE开发中遇到的问题</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="汪振">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        汪振
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        前端coder
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ShangHai CHINA</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wangzhen-CHN" target="_blank">
+                wangzhen-CHN</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wangzhen-CHN">
+                
+                <i class="fa fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Email" href="mailto://137014311@qq.com">
+                
+                <i class="fa fa-envelope-o"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content" style="max-height:700px; overflow-y: auto;">
+        <h3 class="menu-label">
+            文章列表
+        </h3>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-10T08:58:07.000Z">2020-11-10</time></div>
+                    <a href="/2020/11/10/vue3-0%E4%B8%8E2-x%E5%AF%B9%E6%AF%94/" class="has-link-black-ter is-size-6">vue3.0与2.x对比</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T11:41:52.000Z">2020-11-09</time></div>
+                    <a href="/2020/11/09/MD%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">Markdown Nice使用教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-20T07:27:45.000Z">2020-10-20</time></div>
+                    <a href="/2020/10/20/mac%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="has-link-black-ter is-size-6">mac端常用操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T02:40:14.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/%E6%89%8B%E5%86%99Promise/" class="has-link-black-ter is-size-6">手写 Promise</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-09T10:40:14.000Z">2020-07-09</time></div>
+                    <a href="/2020/07/09/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98%E9%80%9F%E8%AE%B0/" class="has-link-black-ter is-size-6">日常问题速记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:40:14.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" class="has-link-black-ter is-size-6">云服务器配置部署前端项目实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-19T07:59:00.000Z">2020-05-19</time></div>
+                    <a href="/2020/05/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="has-link-black-ter is-size-6">前端命名规范</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T15:16:38.000Z">2020-02-18</time></div>
+                    <a href="/2020/02/18/%E8%B7%A8%E5%9F%9F%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">跨域及解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">ESlint报错解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time></div>
+                    <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="has-link-black-ter is-size-6">浮生六记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/03.axios/" class="has-link-black-ter is-size-6">axios</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:11:36.000Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/08.%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="has-link-black-ter is-size-6">前端面试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T10:31:23.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/07.rem%E4%BD%BF%E7%94%A8/" class="has-link-black-ter is-size-6">rem使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-11T01:58:38.000Z">2019-01-11</time></div>
+                    <a href="/2019/01/11/02.%E5%85%B3%E4%BA%8ESPA,SEO,SSR/" class="has-link-black-ter is-size-6">关于SPA,SEO,SSR</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-10T10:02:41.000Z">2019-01-10</time></div>
+                    <a href="/2019/01/10/01.%E4%B8%80%E5%83%8F%E7%B4%A0/" class="has-link-black-ter is-size-6">一像素</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T09:16:33.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/06.MarkDown%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">MarkDown教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-11T09:02:31.000Z">2018-12-11</time></div>
+                    <a href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">vue.js中$watch的oldvalue与newValue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content" style="max-height:700px; overflow-y: auto;">
+        <h3 class="menu-label">
+            文章列表
+        </h3>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-10T08:58:07.000Z">2020-11-10</time></div>
+                    <a href="/2020/11/10/vue3-0%E4%B8%8E2-x%E5%AF%B9%E6%AF%94/" class="has-link-black-ter is-size-6">vue3.0与2.x对比</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T11:41:52.000Z">2020-11-09</time></div>
+                    <a href="/2020/11/09/MD%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">Markdown Nice使用教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-20T07:27:45.000Z">2020-10-20</time></div>
+                    <a href="/2020/10/20/mac%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="has-link-black-ter is-size-6">mac端常用操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T02:40:14.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/%E6%89%8B%E5%86%99Promise/" class="has-link-black-ter is-size-6">手写 Promise</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-09T10:40:14.000Z">2020-07-09</time></div>
+                    <a href="/2020/07/09/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98%E9%80%9F%E8%AE%B0/" class="has-link-black-ter is-size-6">日常问题速记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:40:14.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" class="has-link-black-ter is-size-6">云服务器配置部署前端项目实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-19T07:59:00.000Z">2020-05-19</time></div>
+                    <a href="/2020/05/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="has-link-black-ter is-size-6">前端命名规范</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T15:16:38.000Z">2020-02-18</time></div>
+                    <a href="/2020/02/18/%E8%B7%A8%E5%9F%9F%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">跨域及解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">ESlint报错解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time></div>
+                    <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="has-link-black-ter is-size-6">浮生六记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/03.axios/" class="has-link-black-ter is-size-6">axios</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:11:36.000Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/08.%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="has-link-black-ter is-size-6">前端面试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T10:31:23.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/07.rem%E4%BD%BF%E7%94%A8/" class="has-link-black-ter is-size-6">rem使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-11T01:58:38.000Z">2019-01-11</time></div>
+                    <a href="/2019/01/11/02.%E5%85%B3%E4%BA%8ESPA,SEO,SSR/" class="has-link-black-ter is-size-6">关于SPA,SEO,SSR</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-10T10:02:41.000Z">2019-01-10</time></div>
+                    <a href="/2019/01/10/01.%E4%B8%80%E5%83%8F%E7%B4%A0/" class="has-link-black-ter is-size-6">一像素</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T09:16:33.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/06.MarkDown%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">MarkDown教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-11T09:02:31.000Z">2018-12-11</time></div>
+                    <a href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">vue.js中$watch的oldvalue与newValue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="VUE知识点梳理" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 汪振&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fa fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fa fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fa"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fa fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

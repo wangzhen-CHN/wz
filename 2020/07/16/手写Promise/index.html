@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>手写 Promise - 等一个人</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写 Promise">
+<meta property="og:url" content="http://coder.wang/2020/07/16/%E6%89%8B%E5%86%99Promise/index.html">
+<meta property="og:site_name" content="等一个人">
+<meta property="og:description" content="…">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://img.coder.wang/Promise.png">
+<meta property="article:published_time" content="2020-07-16T02:40:14.000Z">
+<meta property="article:modified_time" content="2020-12-07T10:02:06.795Z">
+<meta property="article:author" content="汪振">
+<meta property="article:tag" content="Promise">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://img.coder.wang/Promise.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.ico">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css"> -->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous"> -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.2.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script>
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="手写 Promise" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">首页</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fa fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="搜索" href="javascript:;">
+                    <i class="fa fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="http://img.coder.wang/Promise.png" alt="手写 Promise">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-07-16T02:40:14.000Z">2020-07-16</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分钟 读完 (大约 859 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                手写 Promise
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><p>…<br><a id="more"></a></p>
+<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; padding: 0 10px; word-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; line-height: 1.25; color: #2b2b2b; font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light; letter-spacing: 2px; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center;"><h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">1. Promise 的基本特征：</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2><br><blockquote class="multiquote-1" data-tool="mdnice编辑器" style="display: block; font-size: 0.9em; overflow: auto; overflow-scrolling: touch; padding-top: 10px; padding-bottom: 10px; padding-left: 20px; padding-right: 10px; margin-bottom: 20px; margin-top: 20px; text-size-adjust: 100%; line-height: 1.55em; font-weight: 400; border-radius: 6px; color: #595959; font-style: normal; text-align: left; box-sizing: inherit; border-left: none; border: 1px solid RGBA(64, 184, 250, .4); background: RGBA(64, 184, 250, .1);"><span style="color: RGBA(64, 184, 250, .5); font-size: 34px; line-height: 1; font-weight: 700;">❝</span><br><ol style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; list-style-type: decimal; font-size: 15px; color: #595959;"><br><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有三个状态：pending，fulfilled，or rejected；「规范 Promise/A+ 2.1」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">new promise时， 需要传递一个executor()执行器，执行器立即执行；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">executor接受两个参数，分别是resolve和reject；.</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise  的默认状态是 pending；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有一个value保存成功状态的值，可以是undefined/thenable/promise；「规范 Promise/A+ 1.3」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 有一个reason保存失败状态的值；「规范 Promise/A+ 1.5」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 只能从pending到rejected, 或者从pending到fulfilled，状态一旦确认，就不会再改变；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">promise 必须有一个then方法，then 接收两个参数，分别是 promise 成功的回调 onFulfilled, 和 promise 失败的回调 onRejected；「规范 Promise/A+ 2.2」</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果调用 then 时，promise 已经成功，则执行onFulfilled，参数是promise的value；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果调用 then 时，promise 已经失败，那么执行onRejected, 参数是promise的reason；</section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;">如果 then 中抛出了异常，那么就会把这个异常作为参数，传递给下一个 then 的失败的回调onRejected；</section></li></ol><br><span style="float: right; color: RGBA(64, 184, 250, .5);">❞</span></blockquote><br><h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">2. 简单实现</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2><br><pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://files.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; letter-spacing: 0px; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 三个状态：PENDING、FULFILLED、REJECTED</span><br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> PENDING = <span class="hljs-string" style="color: #98c379; line-height: 26px;">‘PENDING’</span>;<br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> FULFILLED = <span class="hljs-string" style="color: #98c379; line-height: 26px;">‘FULFILLED’</span>;<br><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> REJECTED = <span class="hljs-string" style="color: #98c379; line-height: 26px;">‘REJECTED’</span>;<br><br><span class="hljs-class" style="line-height: 26px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">class</span> <span class="hljs-title" style="color: #e6c07b; line-height: 26px;">Promise</span> </span>{<br>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">constructor</span>(executor) {<br>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 默认状态为 PENDING</span><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status = PENDING;<br>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 存放成功状态的值，默认为 undefined</span><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value = <span class="hljs-literal" style="color: #56b6c2; line-height: 26px;">undefined</span>;<br>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 存放失败状态的值，默认为 undefined</span><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason = <span class="hljs-literal" style="color: #56b6c2; line-height: 26px;">undefined</span>;<br><br>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 调用此方法就是成功</span><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">let</span> resolve = <span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">value</span>) =></span> {<br>      <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 状态为 PENDING 时才可以更新状态，防止 executor 中调用了两次 resovle/reject 方法</span><br>      <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status ===  PENDING) {<br>        <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status = FULFILLED;<br>        <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value = value;<br>      }<br>    } <br><br>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 调用此方法就是失败</span><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">let</span> reject = <span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">reason</span>) =></span> {<br>      <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 状态为 PENDING 时才可以更新状态，防止 executor 中调用了两次 resovle/reject 方法</span><br>      <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span>(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status ===  PENDING) {<br>        <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status = REJECTED;<br>        <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason = reason;<br>      }<br>    }<br><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">try</span> {<br>      <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 立即执行，将 resolve 和 reject 函数传给使用者  </span><br>      executor(resolve,reject)<br>    } <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">catch</span> (error) {<br>      <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 发生异常时执行失败逻辑</span><br>      reject(error)<br>    }<br>  }<br><br>  <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// 包含一个 then 方法，并接收两个参数 onFulfilled、onRejected</span><br>  then(onFulfilled, onRejected) {<br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span> (<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status === FULFILLED) {<br>      onFulfilled(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.value)<br>    }<br><br>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">if</span> (<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.status === REJECTED) {<br>      onRejected(<span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.reason)<br>    }<br>  }<br>}<br><br></code></pre><br><h2 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 22px; display: block; border-bottom: 4px solid #40B8FA;"><span class="prefix" style="display: flex; width: 20px; height: 20px; background-size: 20px 20px; background-image: url(https://my-wechat.mdnice.com/fullstack-1.png); margin-bottom: -22px;"></span><span class="content" style="display: flex; color: #40B8FA; font-size: 20px; margin-left: 25px;">3. 测试</span><span class="suffix" style="display: flex; box-sizing: border-box; width: 200px; height: 10px; border-top-left-radius: 20px; background: RGBA(64, 184, 250, .5); color: rgb(255, 255, 255); font-size: 16px; letter-spacing: 0.544px; justify-content: flex-end; float: right; margin-top: -10px; box-sizing: border-box !important; overflow-wrap: break-word !important;"></span></h2><br><pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://files.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; letter-spacing: 0px; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> promise = <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">new</span> <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Promise</span>(<span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">resolve, reject</span>) =></span> {<br>  resolve(<span class="hljs-string" style="color: #98c379; line-height: 26px;">‘成功’</span>);<br>}).then(<br>  <span class="hljs-function" style="line-height: 26px;">(<span class="hljs-params" style="line-height: 26px;">data</span>) =></span> {<br>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">‘success’</span>, data)<br>  },<br>  (err) => {<br>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">‘faild’</span>, err)<br>  }<br>)<br></code></pre><br></section></body></html>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3>
+        <div class="buttons is-centered">
+            
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Alipay. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>qrcode</code> for Wechat. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                <!-- Visit https://www.paypal.com/donate/buttons/ to get your donate button -->
+
+<div class="notification is-danger">
+    You forgot to set the <code>business</code> and <code>currency_code</code> for Paypal. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+                
+<div class="notification is-danger">
+    You forgot to set the <code>url</code> Patreon. Please set it in <code>_config.yml</code>.
+</div>
+
+                
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2020/10/20/mac%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">mac端常用操作</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/07/09/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98%E9%80%9F%E8%AE%B0/">
+                <span class="level-item">日常问题速记</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <img class="image is-128x128 has-mb-6" src="/images/avatar.png" alt="汪振">
+                    
+                    
+                    <p class="is-size-4 is-block">
+                        汪振
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        前端coder
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>ShangHai CHINA</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分类
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        0
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        标签
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/wangzhen-CHN" target="_blank">
+                wangzhen-CHN</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/wangzhen-CHN">
+                
+                <i class="fa fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Email" href="mailto://137014311@qq.com">
+                
+                <i class="fa fa-envelope-o"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content" style="max-height:700px; overflow-y: auto;">
+        <h3 class="menu-label">
+            文章列表
+        </h3>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-10T08:58:07.000Z">2020-11-10</time></div>
+                    <a href="/2020/11/10/vue3-0%E4%B8%8E2-x%E5%AF%B9%E6%AF%94/" class="has-link-black-ter is-size-6">vue3.0与2.x对比</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T11:41:52.000Z">2020-11-09</time></div>
+                    <a href="/2020/11/09/MD%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">Markdown Nice使用教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-20T07:27:45.000Z">2020-10-20</time></div>
+                    <a href="/2020/10/20/mac%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="has-link-black-ter is-size-6">mac端常用操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T02:40:14.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/%E6%89%8B%E5%86%99Promise/" class="has-link-black-ter is-size-6">手写 Promise</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-09T10:40:14.000Z">2020-07-09</time></div>
+                    <a href="/2020/07/09/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98%E9%80%9F%E8%AE%B0/" class="has-link-black-ter is-size-6">日常问题速记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:40:14.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" class="has-link-black-ter is-size-6">云服务器配置部署前端项目实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-19T07:59:00.000Z">2020-05-19</time></div>
+                    <a href="/2020/05/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="has-link-black-ter is-size-6">前端命名规范</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T15:16:38.000Z">2020-02-18</time></div>
+                    <a href="/2020/02/18/%E8%B7%A8%E5%9F%9F%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">跨域及解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">ESlint报错解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time></div>
+                    <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="has-link-black-ter is-size-6">浮生六记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/03.axios/" class="has-link-black-ter is-size-6">axios</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:11:36.000Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/08.%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="has-link-black-ter is-size-6">前端面试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T10:31:23.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/07.rem%E4%BD%BF%E7%94%A8/" class="has-link-black-ter is-size-6">rem使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-11T01:58:38.000Z">2019-01-11</time></div>
+                    <a href="/2019/01/11/02.%E5%85%B3%E4%BA%8ESPA,SEO,SSR/" class="has-link-black-ter is-size-6">关于SPA,SEO,SSR</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-10T10:02:41.000Z">2019-01-10</time></div>
+                    <a href="/2019/01/10/01.%E4%B8%80%E5%83%8F%E7%B4%A0/" class="has-link-black-ter is-size-6">一像素</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T09:16:33.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/06.MarkDown%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">MarkDown教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-11T09:02:31.000Z">2018-12-11</time></div>
+                    <a href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">vue.js中$watch的oldvalue与newValue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content" style="max-height:700px; overflow-y: auto;">
+        <h3 class="menu-label">
+            文章列表
+        </h3>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-10T08:58:07.000Z">2020-11-10</time></div>
+                    <a href="/2020/11/10/vue3-0%E4%B8%8E2-x%E5%AF%B9%E6%AF%94/" class="has-link-black-ter is-size-6">vue3.0与2.x对比</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-11-09T11:41:52.000Z">2020-11-09</time></div>
+                    <a href="/2020/11/09/MD%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">Markdown Nice使用教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-20T07:27:45.000Z">2020-10-20</time></div>
+                    <a href="/2020/10/20/mac%E7%AB%AF%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/" class="has-link-black-ter is-size-6">mac端常用操作</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-16T02:40:14.000Z">2020-07-16</time></div>
+                    <a href="/2020/07/16/%E6%89%8B%E5%86%99Promise/" class="has-link-black-ter is-size-6">手写 Promise</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-07-09T10:40:14.000Z">2020-07-09</time></div>
+                    <a href="/2020/07/09/%E6%97%A5%E5%B8%B8%E9%97%AE%E9%A2%98%E9%80%9F%E8%AE%B0/" class="has-link-black-ter is-size-6">日常问题速记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-20T08:40:14.000Z">2020-05-20</time></div>
+                    <a href="/2020/05/20/%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE%E9%83%A8%E7%BD%B2%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%B7%B5/" class="has-link-black-ter is-size-6">云服务器配置部署前端项目实践</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-19T07:59:00.000Z">2020-05-19</time></div>
+                    <a href="/2020/05/19/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83/" class="has-link-black-ter is-size-6">前端命名规范</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-18T15:16:38.000Z">2020-02-18</time></div>
+                    <a href="/2020/02/18/%E8%B7%A8%E5%9F%9F%E5%8F%8A%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">跨域及解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T11:41:52.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/" class="has-link-black-ter is-size-6">VUE知识点梳理</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time></div>
+                    <a href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time></div>
+                    <a href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time></div>
+                    <a href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">ESlint报错解决方案</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time></div>
+                    <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="has-link-black-ter is-size-6">浮生六记</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time></div>
+                    <a href="/2019/01/17/03.axios/" class="has-link-black-ter is-size-6">axios</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-16T08:11:36.000Z">2019-01-16</time></div>
+                    <a href="/2019/01/16/08.%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="has-link-black-ter is-size-6">前端面试</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-15T10:31:23.000Z">2019-01-15</time></div>
+                    <a href="/2019/01/15/07.rem%E4%BD%BF%E7%94%A8/" class="has-link-black-ter is-size-6">rem使用</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-11T01:58:38.000Z">2019-01-11</time></div>
+                    <a href="/2019/01/11/02.%E5%85%B3%E4%BA%8ESPA,SEO,SSR/" class="has-link-black-ter is-size-6">关于SPA,SEO,SSR</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-01-10T10:02:41.000Z">2019-01-10</time></div>
+                    <a href="/2019/01/10/01.%E4%B8%80%E5%83%8F%E7%B4%A0/" class="has-link-black-ter is-size-6">一像素</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-20T09:16:33.000Z">2018-12-20</time></div>
+                    <a href="/2018/12/20/06.MarkDown%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">MarkDown教程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media" style="margin-bottom: 0">
+
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-11T09:02:31.000Z">2018-12-11</time></div>
+                    <a href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">vue.js中$watch的oldvalue与newValue</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="手写 Promise" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 汪振&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fa fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fa fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fa"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-CN");</script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="回到顶端" href="javascript:;">
+    <i class="fa fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="想要查找什么..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
