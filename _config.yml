@@ -79,5 +79,5 @@ theme: icarus
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/wangzhen-CHN/wangzhen-CHN.github.io.git
+  repo: https://github.com/wangzhen-CHN/wz.git
   branch: master
