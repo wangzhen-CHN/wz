@@ -2,17 +2,21 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>归档 - 等一个人</title>
+<title>elementUI中el-select异步赋值自动触发校验问题 - 等一个人</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="等一个人">
-<meta property="og:url" content="http://coder.wang/archives/page/2/index.html">
+    <meta name="description" content="问题：编辑时进行字段必填校验，但是该字段被异步数据改变并置空，而触发校验，页面中表现为初始状态下红框提示必填  123456789101112131415161718192021222324252627282930  el-form(ref&#x3D;&quot;form&quot; :model&#x3D;&quot;formData&quot; :rules&#x3D;&quot;rules&quot;)    el-form-item(label&#x3D;&#39;交货方式&#39; prop&#x3D;&quot;de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="elementUI中el-select异步赋值自动触发校验问题">
+<meta property="og:url" content="http://coder.wang/2020/12/30/elementUI%E4%B8%ADel-select%E5%BC%82%E6%AD%A5%E8%B5%8B%E5%80%BC%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%A0%A1%E9%AA%8C%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="等一个人">
+<meta property="og:description" content="问题：编辑时进行字段必填校验，但是该字段被异步数据改变并置空，而触发校验，页面中表现为初始状态下红框提示必填  123456789101112131415161718192021222324252627282930  el-form(ref&#x3D;&quot;form&quot; :model&#x3D;&quot;formData&quot; :rules&#x3D;&quot;rules&quot;)    el-form-item(label&#x3D;&#39;交货方式&#39; prop&#x3D;&quot;de">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://coder.wang/images/og_image.png">
+<meta property="article:published_time" content="2020-12-30T05:09:49.000Z">
+<meta property="article:modified_time" content="2020-12-30T05:38:29.283Z">
 <meta property="article:author" content="汪振">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://coder.wang/images/og_image.png">
@@ -94,7 +98,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="等一个人" height="28">
+                <img src="/images/logo.png" alt="elementUI中el-select异步赋值自动触发校验问题" height="28">
             
             </a>
         </div>
@@ -132,223 +136,65 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2020
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-12-30T05:09:49.000Z">2020-12-30</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time>
-                        <a href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="has-link-black-ter is-size-6">VUE开发中遇到的问题</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    1 分钟 读完 (大约 151 个字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                elementUI中el-select异步赋值自动触发校验问题
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><blockquote>
+<p>问题：编辑时进行字段必填校验，但是该字段被异步数据改变并置空，而触发校验，页面中表现为初始状态下红框提示必填</p>
+</blockquote>
+<figure class="highlight html hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag"><<span class="hljs-name">template</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"pug"</span>></span></span><br><span class="line">  el-form(ref="form" :model="formData" :rules="rules")</span><br><span class="line">    el-form-item(label='交货方式' prop="deliveryType")</span><br><span class="line">      el-select(v-model="formData.deliveryType")</span><br><span class="line">        el-option(label="自提" :value="1")</span><br><span class="line">        el-option(label="过户" :value="2")</span><br><span class="line">        el-option(label="配送" :value="3")</span><br><span class="line"><span class="hljs-tag">< /<span class="hljs-attr">template</span>></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag"><<span class="hljs-name">script</span>></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="line">  data() {</span><br><span class="line"><span class="hljs-actionscript">    <span class="hljs-keyword">return</span> {</span></span><br><span class="line">      rules: {</span><br><span class="line"><span class="hljs-actionscript">        deliveryType: { required: <span class="hljs-literal">true</span>, message: <span class="hljs-string">'请选择交货方式'</span> }</span></span><br><span class="line">      },</span><br><span class="line">      formData: {</span><br><span class="line"><span class="hljs-actionscript">        deliveryType: <span class="hljs-string">'1'</span></span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  created() {</span><br><span class="line"><span class="hljs-actionscript">    <span class="hljs-comment">// 异步赋值</span></span></span><br><span class="line"><span class="hljs-javascript">    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span></span><br><span class="line"><span class="hljs-actionscript">      <span class="hljs-keyword">this</span>.formData.deliveryType = <span class="hljs-string">''</span></span></span><br><span class="line">    }, 0)</span><br><span class="line">  },</span><br><span class="line">  methods: {}</span><br><span class="line">}</span><br><span class="line"><span class="hljs-tag"></<span class="hljs-name">script</span>></span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>解决：清除校验结果</p>
+</blockquote>
+<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">created() {</span><br><span class="line">  setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span><br><span class="line">    <span class="hljs-keyword">this</span>.formData.deliveryType = <span class="hljs-string">''</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.$nextTick(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span><br><span class="line">      <span class="hljs-keyword">this</span>.$refs.form && <span class="hljs-keyword">this</span>.$refs.form.clearValidate(<span class="hljs-string">'deliveryType'</span>)</span><br><span class="line">    })</span><br><span class="line">  }, <span class="hljs-number">0</span>)</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure></body></html>
+        </div>
+        
+        
+        
     </div>
 </div>
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2019
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time>
-                        <a href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/" class="has-link-black-ter is-size-6">JavaScript进阶问题列表</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time>
-                        <a href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="has-link-black-ter is-size-6">ESlint报错解决方案</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="http://img.coder.wang/20190611171213.png" alt="浮生六记">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time>
-                        <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="has-link-black-ter is-size-6">浮生六记</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time>
-                        <a href="/2019/01/17/03.axios/" class="has-link-black-ter is-size-6">axios</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-16T08:11:36.000Z">2019-01-16</time>
-                        <a href="/2019/01/16/08.%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95/" class="has-link-black-ter is-size-6">前端面试</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-15T10:31:23.000Z">2019-01-15</time>
-                        <a href="/2019/01/15/07.rem%E4%BD%BF%E7%94%A8/" class="has-link-black-ter is-size-6">rem使用</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-11T01:58:38.000Z">2019-01-11</time>
-                        <a href="/2019/01/11/02.%E5%85%B3%E4%BA%8ESPA,SEO,SSR/" class="has-link-black-ter is-size-6">关于SPA,SEO,SSR</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-01-10T10:02:41.000Z">2019-01-10</time>
-                        <a href="/2019/01/10/01.%E4%B8%80%E5%83%8F%E7%B4%A0/" class="has-link-black-ter is-size-6">一像素</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-        </div>
-    </div>
-</div>
 
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        2018
-        </h3>
-        <div class="timeline">
-        
-            <article class="media">
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-12-20T09:16:33.000Z">2018-12-20</time>
-                        <a href="/2018/12/20/06.MarkDown%E6%95%99%E7%A8%8B/" class="has-link-black-ter is-size-6">MarkDown教程</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-        </div>
-    </div>
-</div>
 
-    
 
-    
+
 <div class="card card-transparent">
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-        <div class="pagination-previous">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/">上一页</a>
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2020/11/10/vue3-0%E4%B8%8E2-x%E5%AF%B9%E6%AF%94/">
+                <span class="level-item">vue3.0与2.x对比</span>
+                <i class="level-item fa fa-chevron-right"></i>
+            </a>
         </div>
-        <div class="pagination-next">
-            <a class="is-flex-grow has-text-black-ter" href="/archives/page/3/">下一页</a>
-        </div>
-        <ul class="pagination-list is-hidden-mobile">
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/">1</a></li>
-            
-            <li><a class="pagination-link is-current" href="/archives/page/2/">2</a></li>
-            
-            <li><a class="pagination-link has-text-black-ter" href="/archives/page/3/">3</a></li>
-            
-        </ul>
-    </nav>
+        
+    </div>
 </div>
+
+
 </div>
                 
 
@@ -1038,7 +884,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="等一个人" height="28">
+                    <img src="/images/logo.png" alt="elementUI中el-select异步赋值自动触发校验问题" height="28">
                 
                 </a>
                 <p class="is-size-7">
