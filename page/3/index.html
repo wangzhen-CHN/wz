@@ -139,13 +139,13 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-11T09:02:31.000Z">2018-12-11</time>
+                <time class="level-item has-text-grey" datetime="2020-01-09T10:18:40.000Z">2020-01-09</time>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    几秒 读完 (大约 84 个字)
+                    5 分钟 读完 (大约 751 个字)
                 </span>
                 
                 
@@ -154,18 +154,225 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/">vue.js中$watch的oldvalue与newValue</a>
+                <a class="has-link-black-ter" href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/">VUE开发中遇到的问题</a>
             
         </h1>
         <div class="content">
-            <html><head></head><body><p>由于vue内部机制，导致对象或数组改变时旧值将与新值相同<br></p></body></html>
+            <html><head></head><body><section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; padding: 0 10px; word-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; line-height: 1.25; color: #2b2b2b; font-family: Optima-Regular, Optima, PingFangTC-Light, PingFangSC-light, PingFangTC-light; letter-spacing: 2px; background-image: linear-gradient(90deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%), linear-gradient(360deg, rgba(50, 0, 0, 0.04) 3%, rgba(0, 0, 0, 0) 3%); background-size: 20px 20px; background-position: center center;"><h1 data-tool="mdnice编辑器" style="margin-top: 30px; margin-bottom: 15px; padding: 0px; font-weight: bold; color: black; font-size: 25px;"><span class="prefix" style="font-weight: bold; color: #40B8FA; display: none;"></span><span class="content" style="display: inline-block; font-weight: bold; color: #40B8FA;">对象数组深度监听</span><span class="suffix" style="display: inline-block; font-weight: bold; color: #40B8FA;"></span></h1><blockquote class="multiquote-1" data-tool="mdnice编辑器" style="display: block; font-size: 0.9em; overflow: auto; overflow-scrolling: touch; padding-top: 10px; padding-bottom: 10px; padding-left: 20px; padding-right: 10px; margin-bottom: 20px; margin-top: 20px; text-size-adjust: 100%; line-height: 1.55em; font-weight: 400; border-radius: 6px; color: #595959; font-style: normal; text-align: left; box-sizing: inherit; border-left: none; border: 1px solid RGBA(64, 184, 250, .4); background: RGBA(64, 184, 250, .1);"><span style="color: RGBA(64, 184, 250, .5); font-size: 34px; line-height: 1; font-weight: 700;">❝</span><p style="padding-top: 8px; padding-bottom: 8px; letter-spacing: 2px; font-size: 14px; word-spacing: 2px; margin: 0px; line-height: 26px; color: #595959;">问题: 后端传过来的数组是一个数组对象，页面中绑定对象中某一具体的属性，当该值变化时调用某个函数，自然想到就是watch方法。但如何watch数组对象中某一个具体的属性，显然不可能一个个属性写watch。</p><span style="float: right; color: RGBA(64, 184, 250, .5);">❞</span></blockquote><p data-tool="mdnice编辑器" style="padding-top: 8px; padding-bottom: 8px; line-height: 26px; color: #2b2b2b; margin: 10px 0px; letter-spacing: 2px; font-size: 14px; word-spacing: 2px;">解决办法：</p><ol data-tool="mdnice编辑器" style="margin-top: 8px; margin-bottom: 8px; padding-left: 25px; list-style-type: decimal; font-size: 15px; color: #595959;"><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;"><p style="padding-top: 8px; padding-bottom: 8px; line-height: 26px; color: #2b2b2b; margin: 10px 0px; letter-spacing: 2px; font-size: 14px; word-spacing: 2px;">watch整个对象，设置deep为true，当该对象发生改变时，调用处理函数。</p></section></li><li><section style="margin-top: 5px; margin-bottom: 5px; line-height: 26px; text-align: left; font-size: 14px; font-weight: normal; color: #595959;"><p style="padding-top: 8px; padding-bottom: 8px; line-height: 26px; color: #2b2b2b; margin: 10px 0px; letter-spacing: 2px; font-size: 14px; word-spacing: 2px;">将页面中绑定的属性写在computed函数中，watch这个computed中的函数，当对象值改变时会进入computed函数中，进而进入watch函数中，再调用处理函数。</p></section></li></ol></section></body></html>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/11/04.vue.$watch%E5%80%BC%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98/#more">阅读更多</a>
+                <a class="button is-size-7 is-light" href="/2020/01/09/VUE%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-19T01:41:52.000Z">2019-06-19</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    37 分钟 读完 (大约 5621 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/">JavaScript进阶问题列表</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h1 id="JavaScript-进阶问题列表"><a href="#JavaScript-进阶问题列表" class="headerlink" title="JavaScript 进阶问题列表"></a>JavaScript 进阶问题列表</h1><blockquote>
+<p>摘自<a href="https://github.com/lydiahallie/javascript-questions" target="_blank" rel="noopener">github</a></p>
+</blockquote>
+<p>从基础到进阶，测试你有多了解 JavaScript，刷新你的知识，或者帮助你的 coding 面试！</p>
+<p>答案在问题下方的折叠部分，点击即可展开问题。祝你好运 </p>
+<hr></body></html>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/19/11.JavaScript%E8%BF%9B%E9%98%B6%E9%97%AE%E9%A2%98%E5%88%97%E8%A1%A8/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-18T07:22:55.000Z">2019-06-18</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 分钟 读完 (大约 453 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/">ESlint报错解决方案</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h4 id="Unary-operator-‘-’-used"><a href="#Unary-operator-‘-’-used" class="headerlink" title="Unary operator ‘++’ used"></a>Unary operator ‘++’ used</h4><p>ESLint 不允许++ 运算比如<br></p><figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">3</span>; i ++) {</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">}</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i < <span class="hljs-number">3</span>; i += <span class="hljs-number">1</span>) {</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">temp++</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> temp = <span class="hljs-number">0</span>;</span><br><span class="line">temp += <span class="hljs-number">1</span>;</span><br></pre></td></tr></tbody></table></figure><br></body></html>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/18/10.ESlint%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
+        <a href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/" class="image is-7by1">
+            <img class="thumbnail" src="https://img.coder.wang/20190611171213.png" alt="浮生六记">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-11T08:51:22.000Z">2019-06-11</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 分钟 读完 (大约 2465 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/">浮生六记</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h2 id="衡量爱情的标准，从来只有一个"><a href="#衡量爱情的标准，从来只有一个" class="headerlink" title="衡量爱情的标准，从来只有一个"></a>衡量爱情的标准，从来只有一个</h2><blockquote>
+<p>贾平凹说过：人，可以无知，但不可以无趣。  </p>
+</blockquote>
+<p>一本《浮生六记》让我认识了一位有趣的文人——沈复：  </p>
+<h4 id="他，才情出众，既有文人风雅，亦有稚童心态，虽半生潦倒，依然和夫人将清贫的生活过得热气腾腾。"><a href="#他，才情出众，既有文人风雅，亦有稚童心态，虽半生潦倒，依然和夫人将清贫的生活过得热气腾腾。" class="headerlink" title="他，才情出众，既有文人风雅，亦有稚童心态，虽半生潦倒，依然和夫人将清贫的生活过得热气腾腾。  "></a><b>他，才情出众，既有文人风雅，亦有稚童心态，虽半生潦倒，依然和夫人将清贫的生活过得热气腾腾。  </b></h4></body></html>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/11/09.%E6%B5%AE%E7%94%9F%E5%85%AD%E8%AE%B0/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-17T09:59:40.000Z">2019-01-17</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    几秒 读完 (大约 88 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/01/17/03.axios/">axios</a>
+            
+        </h1>
+        <div class="content">
+            <html><head></head><body><h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2></body></html>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/01/17/03.axios/#more">阅读更多</a>
                 </div>
             </div>
         </div>
@@ -188,7 +395,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/page/2/">上一页</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/page/4/">下一页</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -198,6 +405,10 @@
             <li><a class="pagination-link has-text-black-ter" href="/page/2/">2</a></li>
             
             <li><a class="pagination-link is-current" href="/page/3/">3</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/4/">4</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/page/5/">5</a></li>
             
         </ul>
     </nav>
