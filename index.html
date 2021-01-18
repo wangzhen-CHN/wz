@@ -4,6 +4,11 @@
     <meta charset="utf-8">
 <title>等一个人</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="author"content="汪振">
+<meta name="keywords"content="coder.wang">
+<meta name="keywords"content="wz.js.org">
+<meta name="keywords" content="HTML,VUE,JS,微信小程序等">
+<meta name="description" content="本站作为前端开发工程师-汪振的个人博客，主要用于日常学习记录，分享个人学习心得，欢迎访问">
 
 
 
@@ -145,7 +150,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 151 个字)
+                    1 分钟 读完 (大约 152 个字)
                 </span>
                 
                 
@@ -160,14 +165,17 @@
         <div class="content">
             <html><head></head><body><blockquote>
 <p>问题：编辑时进行字段必填校验，但是该字段被异步数据改变并置空，而触发校验，页面中表现为初始状态下红框提示必填</p>
-</blockquote>
-<figure class="highlight html hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag"><<span class="hljs-name">template</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"pug"</span>></span></span><br><span class="line">  el-form(ref="form" :model="formData" :rules="rules")</span><br><span class="line">    el-form-item(label='交货方式' prop="deliveryType")</span><br><span class="line">      el-select(v-model="formData.deliveryType")</span><br><span class="line">        el-option(label="自提" :value="1")</span><br><span class="line">        el-option(label="过户" :value="2")</span><br><span class="line">        el-option(label="配送" :value="3")</span><br><span class="line"><span class="hljs-tag">< /<span class="hljs-attr">template</span>></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag"><<span class="hljs-name">script</span>></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {</span></span><br><span class="line">  data() {</span><br><span class="line"><span class="hljs-actionscript">    <span class="hljs-keyword">return</span> {</span></span><br><span class="line">      rules: {</span><br><span class="line"><span class="hljs-actionscript">        deliveryType: { required: <span class="hljs-literal">true</span>, message: <span class="hljs-string">'请选择交货方式'</span> }</span></span><br><span class="line">      },</span><br><span class="line">      formData: {</span><br><span class="line"><span class="hljs-actionscript">        deliveryType: <span class="hljs-string">'1'</span></span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  created() {</span><br><span class="line"><span class="hljs-actionscript">    <span class="hljs-comment">// 异步赋值</span></span></span><br><span class="line"><span class="hljs-javascript">    setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span></span><br><span class="line"><span class="hljs-actionscript">      <span class="hljs-keyword">this</span>.formData.deliveryType = <span class="hljs-string">''</span></span></span><br><span class="line">    }, 0)</span><br><span class="line">  },</span><br><span class="line">  methods: {}</span><br><span class="line">}</span><br><span class="line"><span class="hljs-tag"></<span class="hljs-name">script</span>></span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>解决：清除校验结果</p>
-</blockquote>
-<figure class="highlight js hljs"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">created() {</span><br><span class="line">  setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span><br><span class="line">    <span class="hljs-keyword">this</span>.formData.deliveryType = <span class="hljs-string">''</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.$nextTick(<span class="hljs-function"><span class="hljs-params">()</span> =></span> {</span><br><span class="line">      <span class="hljs-keyword">this</span>.$refs.form && <span class="hljs-keyword">this</span>.$refs.form.clearValidate(<span class="hljs-string">'deliveryType'</span>)</span><br><span class="line">    })</span><br><span class="line">  }, <span class="hljs-number">0</span>)</span><br><span class="line">},</span><br></pre></td></tr></tbody></table></figure></body></html>
+</blockquote></body></html>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2020/12/30/elementUI%E4%B8%ADel-select%E5%BC%82%E6%AD%A5%E8%B5%8B%E5%80%BC%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91%E6%A0%A1%E9%AA%8C%E9%97%AE%E9%A2%98/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
