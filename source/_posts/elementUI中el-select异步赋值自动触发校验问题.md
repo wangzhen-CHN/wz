@@ -6,6 +6,8 @@ tags:
 
 > 问题：编辑时进行字段必填校验，但是该字段被异步数据改变并置空，而触发校验，页面中表现为初始状态下红框提示必填
 
+<!-- more -->
+
 ```html
 <template lang="pug">
   el-form(ref="form" :model="formData" :rules="rules")

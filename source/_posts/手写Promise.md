@@ -2,7 +2,7 @@
 title: 手写 Promise
 date: 2020-07-16 10:40:14
 tags: Promise
-thumbnail: "http://img.coder.wang/Promise.png"
+thumbnail: "https://img.coder.wang/Promise.png"
 ---
 ...
 <!-- more -->
